@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.oxiden.awesomeweb.model.Todo;
+import com.example.oxiden.awesomeweb.repository.TodoMapper;
 import com.example.oxiden.awesomeweb.repository.TodoRepository;
 
 @RestController
@@ -18,9 +19,11 @@ import com.example.oxiden.awesomeweb.repository.TodoRepository;
 public class TodoController {
 
 	private final TodoRepository repo;
+	private final TodoMapper mapper;
 
-	TodoController(TodoRepository repo) {
+	TodoController(TodoRepository repo, TodoMapper mapper) {
 		this.repo = repo;
+		this.mapper = mapper;
 	}
 
 	@GetMapping("/one")
@@ -32,6 +35,6 @@ public class TodoController {
 
 	@GetMapping("/all")
 	public List<Todo> todo2() {
-		return repo.getAll();
+		return mapper.getAll();
 	}
 }
